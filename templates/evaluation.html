@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation - Autism Diagnosis System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .metrics {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .metric-item {
+            margin-bottom: 10px;
+        }
+        .metric-label {
+            font-weight: bold;
+        }
+        .confusion-matrix {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .classification-report {
+            margin-top: 20px;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .section-title {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Autism Diagnosis System</h1>
+    
+    <div class="container">
+        <h2>Model Evaluation Metrics</h2>
+        
+        <div class="metrics">
+            <div class="metric-item">
+                <span class="metric-label">Accuracy:</span> {{ metrics.accuracy|round(4) }}
+            </div>
+            
+            {% if metrics.roc_auc %}
+            <div class="metric-item">
+                <span class="metric-label">ROC AUC:</span> {{ metrics.roc_auc|round(4) }}
+            </div>
+            {% endif %}
+            
+            {% if metrics.pr_auc %}
+            <div class="metric-item">
+                <span class="metric-label">PR AUC:</span> {{ metrics.pr_auc|round(4) }}
+            </div>
+            {% endif %}
+            
+            <div class="metric-item">
+                <span class="metric-label">Sensitivity (True Positive Rate):</span> {{ metrics.sensitivity|round(4) }}
+            </div>
+            
+            <div class="metric-item">
+                <span class="metric-label">Specificity (True Negative Rate):</span> {{ metrics.specificity|round(4) }}
+            </div>
+            
+            <h3 class="section-title">Confusion Matrix</h3>
+            <div class="confusion-matrix">
+                {{ metrics.confusion_matrix }}
+            </div>
+            
+            <h3 class="section-title">Classification Report</h3>
+            <div class="classification-report">
+                {{ metrics.classification_report }}
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="/" class="btn">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
