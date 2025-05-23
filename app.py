@@ -5,7 +5,6 @@ import pandas as pd
 import uvicorn
 from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 # Import prediction function from AI.py
@@ -16,10 +15,6 @@ app = FastAPI(title="Autism Diagnosis System")
 
 # Create templates directory if it doesn't exist
 os.makedirs("templates", exist_ok=True)
-os.makedirs("static", exist_ok=True)
-
-# Mount static files directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Set up Jinja2 templates
 templates = Jinja2Templates(directory="templates")
